@@ -21,7 +21,7 @@ export default function Navbar() {
     const isMobile = useMediaQuery('(max-width:950px)');
 
     return (
-        <nav className={`${isScrolled ? 'bg-black' : 'bg-transparent'} text-white py-5 px-5 md:px-10 fixed z-10 w-full transition-colors duration-300`}>
+        <nav className={`${isScrolled ? 'bg-black' : 'bg-transparent'} text-white py-6 px-5 md:px-10 fixed z-10 w-full transition-colors duration-300`}>
             <div className="container mx-auto flex justify-between items-center w-full">
                 <div>
                     <div className="relative w-24 flex justify-center items-center">
