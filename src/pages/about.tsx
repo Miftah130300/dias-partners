@@ -8,7 +8,7 @@ import VideocamIcon from '@mui/icons-material/Videocam';
 import BrushIcon from '@mui/icons-material/Brush';
 import InterestsIcon from '@mui/icons-material/Interests';
 import WebIcon from '@mui/icons-material/Web';
-import oji from "/public/miftah-fauzy.jpg"
+import sam from "/public/sam-altman.jpeg"
 
 export default function About() {
     return (
@@ -101,11 +101,11 @@ export default function About() {
                         <div className="flex flex-col md:flex-row gap-5">
                             {Array.from({ length: 5 }, (_, i) => (
                                 <div key={i} className="max-w-sm bg-black text-white text-center border-gray-200 rounded-lg gap-3 flex flex-col">
-                                    <Image className="rounded-lg" src={oji} alt="" />
+                                    <Image className="rounded-lg" src={sam} alt="" />
                                     <div>
                                         <h1>
-                                            <span className="font-bold">Miftah </span>
-                                            <span className={`${libreBaskerville.className} italic font-sans`}>Fauzy</span>
+                                            <span className="font-bold">Sam </span>
+                                            <span className={`${libreBaskerville.className} italic font-sans`}>Altman</span>
                                         </h1>
                                         <p>Chief Executive Officer</p>
                                     </div>
