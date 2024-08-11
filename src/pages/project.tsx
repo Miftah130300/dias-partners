@@ -2,18 +2,54 @@ import Head from "next/head";
 import { libreBaskerville } from "src/font/font";
 import dynamic from "next/dynamic";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
-
+const DynamicHamburger = dynamic(() => import('hamburger-react').then(mod => mod.Sling), { ssr: false });
+import { useState, useEffect } from 'react';
+import { useMediaQuery } from '@mui/material';
 const Navbar = dynamic(() => import('src/component/navbar'), { ssr: false });
 const Footer = dynamic(() => import('src/component/footer'), { ssr: false });
 
 export default function Project() {
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 0);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const isMobile = useMediaQuery('(max-width:950px)');
     return (
         <>
             <Head>
                 <title>Projects | Dias & Partners</title>
             </Head>
             <main className="bg-black">
-                <Navbar />
+                <nav className={`${isScrolled ? 'bg-black' : 'bg-transparent'} text-white py-5 px-5 md:px-10 fixed z-10 w-full transition-colors duration-300`}>
+                    <div className="container mx-auto flex justify-between items-center w-full">
+                        <div>
+                            <div className="relative w-24 flex justify-center items-center">
+                                <Image
+                                    src={logo}
+                                    alt="Background Image"
+                                    objectFit="cover"
+                                    height={100}
+                                    width={100}
+                                />
+                            </div>
+                        </div>
+                        {isMobile ? (<DynamicHamburger />) : (
+                            <ul className="space-x-8 text-sm flex gap-10">
+                                <Link href="/"><li className="hover:underline">Home</li></Link>
+                                <Link href="/about"><li className="hover:underline">About</li></Link>
+                                <Link href="/project"><li className="hover:underline">Projects</li></Link>
+                                <Link href="/contact"><li className="hover:underline">Contact</li></Link>
+                            </ul>
+                        )}
+                    </div>
+                </nav>
                 <div className="bg-black text-white flex justify-center items-center px-5 md:px-10 pt-40 pb-10 md:pb-32">
                     <div className="md:w-3/4 text-center flex flex-col gap-5">
                         <div className="text-3xl md:text-5xl mb-4">
