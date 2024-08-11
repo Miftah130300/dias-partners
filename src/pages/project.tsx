@@ -5,6 +5,9 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 const DynamicHamburger = dynamic(() => import('hamburger-react').then(mod => mod.Sling), { ssr: false });
 import { useState, useEffect } from 'react';
 import { useMediaQuery } from '@mui/material';
+import Link from "next/link";
+import Image from "next/image";
+import logo from "/public/logo.svg";
 const Navbar = dynamic(() => import('src/component/navbar'), { ssr: false });
 const Footer = dynamic(() => import('src/component/footer'), { ssr: false });
 
