@@ -1,9 +1,9 @@
-import { useRouter } from "next/router"
-import Image from "next/image"
-import { dataProject } from "../api/data-project"
-import Navbar from "src/component/navbar"
-import Head from "next/head"
-import { StaticImageData } from "next/image"
+import { useRouter } from "next/router";
+import Image from "next/image";
+import { dataProject } from "../api/data-project";
+import Navbar from "src/component/navbar";
+import Head from "next/head";
+import { StaticImageData } from "next/image";
 import { libreBaskerville } from "src/font/font";
 
 interface Project {
@@ -11,27 +11,26 @@ interface Project {
     title: string;
     description: string;
     type: string;
-    asset1: StaticImageData;
-    asset2: StaticImageData;
-    asset3: StaticImageData;
-    asset4: StaticImageData;
-    asset5: StaticImageData;
-    asset6: StaticImageData;
-    cover: StaticImageData;
-    hero: StaticImageData;
+    asset1?: StaticImageData;
+    asset2?: StaticImageData;
+    asset3?: StaticImageData;
+    asset4?: StaticImageData;
+    asset5?: StaticImageData;
+    asset6?: StaticImageData;
+    cover?: StaticImageData;
+    hero?: StaticImageData;
 }
 
 export default function DetailProject() {
-    const route = useRouter()
-    const { slug } = route.query
-    const data = dataProject.find(item => item.title === slug)
-    const assets = [data?.asset1, data?.asset2, data?.asset3, data?.asset4, data?.asset5, data?.asset6]
+    const route = useRouter();
+    const { slug } = route.query;
+    const data = dataProject.find(item => item.title === slug);
+    const assets = [data?.asset1, data?.asset2, data?.asset3, data?.asset4, data?.asset5, data?.asset6].filter((asset): asset is StaticImageData => asset !== undefined);
 
     if (!data) {
-        return (
-            <div>No data found</div>
-        )
+        return <div>No data found</div>;
     }
+
     return (
         <>
             <Head>halo</Head>
@@ -40,7 +39,7 @@ export default function DetailProject() {
                 <div className="relative flex h-screen w-full">
                     <div className="absolute inset-0 w-full h-full">
                         <Image
-                            src={data.hero}
+                            src={data.hero || '/fallback-image.jpg'} // Provide a fallback image if hero is undefined
                             alt="Background Image"
                             layout="fill"
                             objectFit="cover"
@@ -76,5 +75,5 @@ export default function DetailProject() {
                 </div>
             </main>
         </>
-    )
+    );
 }
