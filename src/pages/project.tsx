@@ -29,7 +29,7 @@ export default function Project() {
     //tabs code
     const categories = ['All', 'Video & Photo', 'Graphic & Motion', 'Brand Dev', 'Landing Page'];
 
-    const filterProjects = (category) => {
+    const filterProjects = (category: any) => {
         if (category === 'All') {
             return dataProject;
         }
