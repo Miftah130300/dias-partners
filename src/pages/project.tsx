@@ -10,6 +10,7 @@ import Image from "next/image";
 import logo from "/public/logo.svg";
 const Navbar = dynamic(() => import('src/component/navbar'), { ssr: false });
 const Footer = dynamic(() => import('src/component/footer'), { ssr: false });
+import { dataProject } from "./api/data-project";
 
 export default function Project() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -24,6 +25,16 @@ export default function Project() {
     }, []);
 
     const isMobile = useMediaQuery('(max-width:950px)');
+
+    //tabs code
+    const categories = ['All', 'Video & Photo', 'Graphic & Motion', 'Brand Dev', 'Landing Page'];
+
+    const filterProjects = (category) => {
+        if (category === 'All') {
+            return dataProject;
+        }
+        return dataProject.filter(project => project.type === category);
+    };
     return (
         <>
             <Head>
@@ -78,25 +89,44 @@ export default function Project() {
                                 <span className={`${libreBaskerville.className} italic font-sans`}>Projects</span>
                             </h1>
                         </div>
-                        <TabGroup className="flex flex-col gap-10 w-full justify-center items-center">
+                        <TabGroup className='flex flex-col gap-10'>
                             <TabList className="flex justify-center w-full flex-wrap gap-2 md:gap-10">
-                                {['All', 'Video & Photo', 'Graphic & Motion', 'Brand Dev', 'Landing Page'].map((tab) => (
+                                {categories.map((category) => (
                                     <Tab
-                                        key={tab}
+                                        key={category}
                                         className={({ selected }) =>
                                             `flex-3 p-2 rounded-lg text-center ${selected ? 'bg-white bg-opacity-25 text-white' : 'text-white hover:bg-white hover:bg-opacity-25'}`
                                         }
                                     >
-                                        {tab}
+                                        {category}
                                     </Tab>
                                 ))}
                             </TabList>
                             <TabPanels>
-                                <TabPanel className="text-white">These are all our projects.</TabPanel>
-                                <TabPanel className="text-white">This is video & photo project. Seems cool, right?</TabPanel>
-                                <TabPanel className="text-white">This is an amazing graphic & motion design.</TabPanel>
-                                <TabPanel className="text-white">Do you want to build cutomer trust? we`re ready to help you to develop your brand.</TabPanel>
-                                <TabPanel className="text-white">Online presence? we have landing page development.</TabPanel>
+                                {categories.map((category) => (
+                                    <TabPanel key={category} className="text-white">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                            {filterProjects(category).map((project) => (
+                                                <Link key={project.id} href={`/project/${project.title}`}>
+                                                    <div className="relative w-full md:w-96 h-72 rounded-lg overflow-hidden">
+                                                        <Image
+                                                            src={project.cover}
+                                                            alt={project.title}
+                                                            layout="fill"
+                                                            objectFit="cover"
+                                                            quality={100}
+                                                            className="rounded-lg"
+                                                        />
+                                                        <div className="absolute inset-0 flex flex-col justify-center p-5 bg-black bg-opacity-0 text-transparent transition-all duration-300 ease-in-out hover:bg-opacity-50 hover:text-white">
+                                                            <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
+                                                            <p className="text-lg">{project.type}</p>
+                                                        </div>
+                                                    </div>
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </TabPanel>
+                                ))}
                             </TabPanels>
                         </TabGroup>
                     </div>

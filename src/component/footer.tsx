@@ -1,5 +1,10 @@
 import Image from "next/image";
 import logo from "/public/logo.svg";
+import InstagramIcon from '@mui/icons-material/Instagram';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import PhoneIcon from '@mui/icons-material/Phone';
+import EmailIcon from '@mui/icons-material/Email';
 
 export default function Footer() {
     return (
@@ -18,14 +23,29 @@ export default function Footer() {
             </div>
             <div>
                 <div>Connect with us:</div>
-                <div>Instagram name</div>
-                <div>YouTube name</div>
-                <div>LinkedIn name</div>
+                <div className="flex gap-2">
+                    <InstagramIcon />
+                    <div>Instagram name</div>
+                </div>
+                <div className="flex gap-2">
+                    <YouTubeIcon />
+                    <div>YouTube name</div>
+                </div>
+                <div className="flex gap-2">
+                    <LinkedInIcon />
+                    <div>LinkedIn name</div>
+                </div>
             </div>
             <div>
                 <div>Let`s collaborate:</div>
-                <div>Phone</div>
-                <div>Email</div>
+                <div className="flex gap-2">
+                    <PhoneIcon />
+                    <div>Phone number</div>
+                </div>
+                <div className="flex gap-2">
+                    <EmailIcon />
+                    <div>Email address</div>
+                </div>
             </div>
         </div>
     );
