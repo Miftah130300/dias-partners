@@ -18,6 +18,7 @@ import { Carousel } from "flowbite-react";
 const DynamicHamburger = dynamic(() => import('hamburger-react').then(mod => mod.Sling), { ssr: false });
 import { useState, useEffect } from 'react';
 import { useMediaQuery } from '@mui/material';
+import Rating from '@mui/material/Rating';
 
 export default function Home() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -225,89 +226,85 @@ export default function Home() {
                 </div>
                 <div className='bg-black h-screen flex items-center justify-center'>
                     <Carousel className='px-5 md:px-10' autoFocus>
-                        <div className='bg-white w-full h-96 md:w-[700px] rounded-lg flex flex-col md:flex-row justify-center items-center p-5 md:p-10 gap-10'>
-                            <div className=' border border-black rounded-lg h-52 md:h-full w-full md:w-96'>
+                        <div className='bg-white bg-opacity-25 w-full h-96 md:w-[700px] rounded-lg flex flex-col md:flex-row justify-center items-center p-5 md:p-10 gap-10'>
+                            <div className='border border-white rounded-lg h-52 md:h-full w-full md:w-96'>
                             </div>
                             <div className='flex flex-col justify-center max-md:items-center gap-5'>
-                                <h1 className='text-2xl text-black '>
+                                <h1 className='text-2xl text-white '>
                                     <span className="font-semibold">Lorem ipsum </span>
                                     <span className={`${libreBaskerville.className} italic font-sans`}>dolor </span>
                                     <span className="font-bold">sit</span>
                                 </h1>
-                                <button className='text-white p-4 bg-black rounded-lg max-w-52 font-bold hover:bg-neutral-700 hover:bg-opacity-80'>VIEW PROJECT</button>
+                                <button className='text-black p-4 bg-white rounded-lg max-w-52 font-bold hover:bg-white hover:bg-opacity-80'>VIEW PROJECT</button>
                             </div>
                         </div>
-                        <div className='bg-white w-full h-96 md:w-[700px] rounded-lg flex flex-col md:flex-row justify-center items-center p-5 md:p-10 gap-10'>
-                            <div className=' border border-black rounded-lg h-52 md:h-full w-full md:w-96'>
+                        <div className='bg-white bg-opacity-25 w-full h-96 md:w-[700px] rounded-lg flex flex-col md:flex-row justify-center items-center p-5 md:p-10 gap-10'>
+                            <div className='border border-white rounded-lg h-52 md:h-full w-full md:w-96'>
                             </div>
                             <div className='flex flex-col justify-center max-md:items-center gap-5'>
-                                <h1 className='text-2xl text-black '>
+                                <h1 className='text-2xl text-white '>
                                     <span className="font-semibold">Lorem ipsum </span>
                                     <span className={`${libreBaskerville.className} italic font-sans`}>dolor </span>
                                     <span className="font-bold">sit</span>
                                 </h1>
-                                <button className='text-white p-4 bg-black rounded-lg max-w-52 font-bold hover:bg-neutral-700 hover:bg-opacity-80'>VIEW PROJECT</button>
+                                <button className='text-black p-4 bg-white rounded-lg max-w-52 font-bold hover:bg-white hover:bg-opacity-80'>VIEW PROJECT</button>
                             </div>
                         </div>
-                        <div className='bg-white w-full h-96 md:w-[700px] rounded-lg flex flex-col md:flex-row justify-center items-center p-5 md:p-10 gap-10'>
-                            <div className=' border border-black rounded-lg h-52 md:h-full w-full md:w-96'>
+                        <div className='bg-white bg-opacity-25 w-full h-96 md:w-[700px] rounded-lg flex flex-col md:flex-row justify-center items-center p-5 md:p-10 gap-10'>
+                            <div className='border border-white rounded-lg h-52 md:h-full w-full md:w-96'>
                             </div>
                             <div className='flex flex-col justify-center max-md:items-center gap-5'>
-                                <h1 className='text-2xl text-black '>
+                                <h1 className='text-2xl text-white '>
                                     <span className="font-semibold">Lorem ipsum </span>
                                     <span className={`${libreBaskerville.className} italic font-sans`}>dolor </span>
                                     <span className="font-bold">sit</span>
                                 </h1>
-                                <button className='text-white p-4 bg-black rounded-lg max-w-52 font-bold hover:bg-neutral-700 hover:bg-opacity-80'>VIEW PROJECT</button>
+                                <button className='text-black p-4 bg-white rounded-lg max-w-52 font-bold hover:bg-white hover:bg-opacity-80'>VIEW PROJECT</button>
                             </div>
                         </div>
                     </Carousel>
                 </div>
-                {/* <div className='bg-black h-screen flex flex-col items-center gap-10 px-10 py-20'>
+                <div className='bg-black h-screen flex flex-col items-center gap-10 px-10 py-20'>
                     <h1 className='text-2xl text-white'>
                         <span className="font-bold">Why </span>
                         <span className={`${libreBaskerville.className} italic font-sans`}>clients </span>
                         <span className="font-bold">love us</span>
                     </h1>
-                    <div className='text-white flex flex-col md:flex-row gap-10'>
-                        <div className='h-[250px] flex gap-5'>
-                            <div className='relative w-[250px]'>
-                                <Image src={service4} alt="Image 4"
-                                    layout="fill"
-                                    objectFit="cover"
-                                    className="rounded-lg" />
+                    <div className='flex flex-col md:flex-row  gap-5'>
+                        <div className="w-full md:w-[300px] rounded-lg border-r border-b border-llg:border-l-0 lg:border-t bg-white p-4 flex flex-col justify-between leading-normal">
+                            <div className="mb-8 gap-3 flex flex-col">
+                                <Rating name="read-only" value={4} readOnly />
+                                <p className="text-gray-700 text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
                             </div>
-                            <div className='w-[300px] flex'>
-                                <div className='flex flex-col justify-between'>
-                                    <p>“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl nulla. Proin vel malesuada magna. Nulla facilisi. Aenean ac massa eget urna lacinia fringilla. “</p>
-                                    <div>
-                                        <p>Miftah Fauzy</p>
-                                        <p>Founder @apaya</p>
-                                    </div>
+                            <div className="flex items-center">
+                                <Image className="w-10 h-10 rounded-full mr-4" src={service1} alt="Avatar of Jonathan Reinink" />
+                                <div className="text-sm">
+                                    <p className="text-gray-900 leading-none">Jonathan Reinink</p>
+                                    <p className="text-gray-600">CEO of OpenAI</p>
                                 </div>
                             </div>
                         </div>
-                        <div className='h-[250px] flex gap-5'>
-                            <div className='relative w-[250px]'>
-                                <Image src={service4} alt="Image 4"
-                                    layout="fill"
-                                    objectFit="cover"
-                                    className="rounded-lg" />
+                        <div className="w-full md:w-[300px] rounded-lg border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white p-4 flex flex-col justify-between leading-normal">
+                            <div className="mb-8 gap-3 flex flex-col">
+                                <Rating name="read-only" value={4} readOnly />
+                                <p className="text-gray-700 text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
                             </div>
-                            <div className='w-[300px] flex'>
-                                <div className='flex flex-col justify-between'>
-                                    <p>“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl nulla. Proin vel malesuada magna. Nulla facilisi. Aenean ac massa eget urna lacinia fringilla. “</p>
-                                    <div>
-                                        <p>Miftah Fauzy</p>
-                                        <p>Founder @apaya</p>
-                                    </div>
+                            <div className="flex items-center">
+                                <Image className="w-10 h-10 rounded-full mr-4" src={service1} alt="Avatar of Jonathan Reinink" />
+                                <div className="text-sm">
+                                    <p className="text-gray-900 leading-none">Jonathan Reinink</p>
+                                    <p className="text-gray-600">CEO of OpenAI</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div> */}
-                <div className='bg-black h-screen w-full'>
-                    <h1>Clients</h1>
+                </div>
+                <div className='bg-black h-screen w-full flex flex-col items-center'>
+                    <h1 className='text-2xl text-white'>
+                        <span className="font-bold">We </span>
+                        <span className={`${libreBaskerville.className} italic font-sans`}>worked </span>
+                        <span className="font-bold">with</span>
+                    </h1>
                 </div>
                 <div className='bg-black flex flex-col justify-center items-center py-32 gap-5 w-full'>
                     <h1 className='text-white text-2xl'>
