@@ -1,23 +1,40 @@
 import Head from "next/head";
 import { libreBaskerville } from "src/font/font";
 import dynamic from "next/dynamic";
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useProjects } from "./api/data";
 import Image from "next/image";
-const Navbar = dynamic(() => import('src/component/navbar'), { ssr: false });
-const Footer = dynamic(() => import('src/component/footer'), { ssr: false });
-import { dataProject } from "./api/data-project";
+
+// Custom loader function for handling image URLs
+const myLoader = ({ src }: { src: string }) => {
+    return src ? `${process.env.NEXT_PUBLIC_API_URL}${src}` : "/placeholder.png";
+};
+
+const Navbar = dynamic(() => import("src/component/navbar"), { ssr: false });
+const Footer = dynamic(() => import("src/component/footer"), { ssr: false });
 
 export default function Project() {
-    //tabs code
-    const categories = ['All', 'Video & Photo', 'Graphic & Motion', 'Brand Dev', 'Landing Page'];
+    const { projects, loading, error } = useProjects();
 
-    const filterProjects = (category: any) => {
-        if (category === 'All') {
-            return dataProject;
+    const categories = ["All", "Video & Photo", "Graphic & Motion", "Brand Dev", "Landing Page"];
+
+    const filterProjects = (category: string) => {
+        if (category === "All") {
+            return projects;
         }
-        return dataProject.filter(project => project.type === category);
+        return projects.filter((project) => project.type === category);
     };
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
+    if (error) {
+        return <p className="text-red-500">{error}</p>;
+    }
+
     return (
         <>
             <Head>
@@ -38,7 +55,11 @@ export default function Project() {
                             </h1>
                         </div>
                         <div className="text-lg md:text-xl font-sans">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl nulla. Proin vel malesuada magna. Nulla facilisi. Aenean ac massa eget urna lacinia fringilla.</p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl nulla.
+                                Proin vel malesuada magna. Nulla facilisi. Aenean ac massa eget urna lacinia
+                                fringilla.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -50,13 +71,16 @@ export default function Project() {
                                 <span className={`${libreBaskerville.className} italic font-sans`}>Projects</span>
                             </h1>
                         </div>
-                        <TabGroup className='flex flex-col gap-10'>
+                        <TabGroup className="flex flex-col gap-10">
                             <TabList className="flex justify-center w-full flex-wrap gap-2 md:gap-10">
                                 {categories.map((category) => (
                                     <Tab
                                         key={category}
                                         className={({ selected }) =>
-                                            `flex-3 p-2 rounded-lg text-center ${selected ? 'bg-white bg-opacity-25 text-white' : 'text-white hover:bg-white hover:bg-opacity-25'}`
+                                            `flex-3 p-2 rounded-lg text-center ${selected
+                                                ? "bg-white bg-opacity-25 text-white"
+                                                : "text-white hover:bg-white hover:bg-opacity-25"
+                                            }`
                                         }
                                     >
                                         {category}
@@ -68,10 +92,13 @@ export default function Project() {
                                     <TabPanel key={category} className="text-white">
                                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                             {filterProjects(category).map((project) => (
-                                                <Link key={project.id} href={`/project/${project.title}`}>
+                                                <Link key={project.id} href={`/project/${project.title.toLowerCase().replace(/\s+/g, '-')}`}>
                                                     <div className="relative w-full md:w-96 h-72 rounded-lg overflow-hidden">
                                                         <Image
-                                                            src={project.cover}
+                                                            loader={myLoader}
+                                                            src={
+                                                                project.image.url || "/placeholder.png"
+                                                            }
                                                             alt={project.title}
                                                             layout="fill"
                                                             objectFit="cover"
