@@ -14,8 +14,14 @@ const Footer = dynamic(() => import('src/component/footer'), { ssr: false });
 const Navbar = dynamic(() => import('src/component/navbar'), { ssr: false });
 import { Carousel } from "flowbite-react";
 import Rating from '@mui/material/Rating';
+import { usePartner } from './api/data';
+
+const myLoader = ({ src }: { src: string }) => {
+    return src ? `${process.env.NEXT_PUBLIC_API_URL}${src}` : "/placeholder.png";
+};
 
 export default function Home() {
+    const { partners } = usePartner()
     return (
         <>
             <Head>
@@ -260,14 +266,27 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div className='bg-black h-screen w-full flex flex-col items-center'>
-                    <h1 className='text-2xl text-white'>
+                <div className="bg-black py-20 w-full flex flex-col items-center">
+                    <h1 className="text-2xl text-white">
                         <span className="font-bold">We </span>
                         <span className={`${libreBaskerville.className} italic font-sans`}>worked </span>
                         <span className="font-bold">with</span>
                     </h1>
+                    <div className="flex flex-wrap justify-center gap-6 mt-8">
+                        {partners.map((partner) => (
+                            <div key={partner.id} className="w-[100px] h-[100px] relative">
+                                <Image
+                                    className="rounded-lg object-contain"
+                                    src={partner.image.url}
+                                    layout='fill'
+                                    loader={myLoader}
+                                    alt={`Image of ${partner.name}`}
+                                />
+                            </div>
+                        ))}
+                    </div>
                 </div>
-                <div className='bg-black flex flex-col justify-center items-center py-32 gap-5 w-full'>
+                <div className='bg-black flex flex-col justify-center items-center py-20 gap-5 w-full'>
                     <h1 className='text-white text-2xl'>
                         <span className="font-bold">Ready to </span>
                         <span className={`${libreBaskerville.className} italic font-sans`}>collaborate </span>

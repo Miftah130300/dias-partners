@@ -8,9 +8,14 @@ import VideocamIcon from '@mui/icons-material/Videocam';
 import BrushIcon from '@mui/icons-material/Brush';
 import InterestsIcon from '@mui/icons-material/Interests';
 import WebIcon from '@mui/icons-material/Web';
-import sam from "/public/sam-altman.jpeg"
+import { useTeam } from "./api/data";
+
+const myLoader = ({ src }: { src: string }) => {
+    return src ? `${process.env.NEXT_PUBLIC_API_URL}${src}` : "/placeholder.png";
+};
 
 export default function About() {
+    const { teams } = useTeam()
     return (
         <>
             <Head>
@@ -99,15 +104,23 @@ export default function About() {
                             </h1>
                         </div>
                         <div className="flex flex-col md:flex-row gap-5">
-                            {Array.from({ length: 5 }, (_, i) => (
-                                <div key={i} className="max-w-sm bg-black text-white text-center border-gray-200 rounded-lg gap-3 flex flex-col">
-                                    <Image className="rounded-lg" src={sam} alt="" />
+                            {teams.map((team) => (
+                                <div key={team.id} className="max-w-sm bg-black text-white text-center border-gray-200 rounded-lg gap-3 flex flex-col">
+                                    <div className="relative w-[200px] h-[350px] mx-auto">
+                                        <Image
+                                            className="rounded-lg object-cover"
+                                            loader={myLoader}
+                                            layout="fill"
+                                            src={team.image.url}
+                                            alt={`Image of ${team.name} ${team.lastName}`}
+                                        />
+                                    </div>
                                     <div>
                                         <h1>
-                                            <span className="font-bold">Sam </span>
-                                            <span className={`${libreBaskerville.className} italic font-sans`}>Altman</span>
+                                            <span className="font-bold">{team.name} </span>
+                                            <span className={`${libreBaskerville.className} italic font-sans`}>{team.lastName}</span>
                                         </h1>
-                                        <p>Chief Executive Officer</p>
+                                        <p>{team.position}</p>
                                     </div>
                                 </div>
                             ))}
