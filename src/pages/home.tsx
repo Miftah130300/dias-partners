@@ -206,7 +206,7 @@ export default function Home() {
                                         alt={project.title}
                                         layout="fill"
                                         objectFit="cover"
-                                        className='rounded-lg'
+                                        className='rounded-lg img'
                                         loader={myLoader}
                                     />
                                 </div>
