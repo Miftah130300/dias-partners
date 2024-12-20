@@ -24,7 +24,6 @@ interface Project {
     };
 }
 
-// Custom loader function for handling image URLs
 const myLoader = ({ src }: { src: string }) => {
     return `${process.env.NEXT_PUBLIC_API_URL}${src}`;
 };

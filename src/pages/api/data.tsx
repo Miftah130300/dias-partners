@@ -30,6 +30,17 @@ interface Project {
     projects: {
         url: string;
     }[]
+    statusProject: string;
+}
+
+interface Testimony {
+    id: number;
+    name: string;
+    occupation: string;
+    testimony: string;
+    image: {
+        url: string;
+    }
 }
 
 export const useTeam = () => {
@@ -116,4 +127,31 @@ export const useProjects = () => {
     }, []);
 
     return { projects, loading, error };
+};
+
+export const useTestimony = () => {
+    const [testimonies, setTestimonies] = useState<Testimony[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/dias-testimonies?populate=*`, {
+                    headers: {
+                        Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
+                    },
+                });
+                if (!res.ok) {
+                    throw new Error("Failed to fetch cities");
+                }
+                const data = await res.json();
+                setTestimonies(data.data || []);
+            } catch (error) {
+                console.log(error)
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    return { testimonies };
 };
