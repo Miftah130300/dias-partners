@@ -235,7 +235,7 @@ export default function Home() {
                             <div key={testimony.id} className="w-full md:w-[300px] rounded-lg border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white bg-opacity-25 p-4 flex flex-col justify-between leading-normal">
                                 <div className="mb-8 gap-3 flex flex-col">
 
-                                    <p className="text-white text-base">"{testimony.testimony}"</p>
+                                    <p className="text-white text-base">{testimony.testimony}</p>
                                 </div>
                                 <div className="flex items-center">
                                     <Image className="w-10 h-10 rounded-full mr-4" src={service1} alt="Avatar of Jonathan Reinink" />
