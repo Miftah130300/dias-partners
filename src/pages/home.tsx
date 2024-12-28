@@ -14,7 +14,7 @@ const Footer = dynamic(() => import('src/component/footer'), { ssr: false });
 const Navbar = dynamic(() => import('src/component/navbar'), { ssr: false });
 import { Carousel } from "flowbite-react";
 import Rating from '@mui/material/Rating';
-import { usePartner, useProjects, useTestimony } from './api/data';
+import { usePartner, useProjects, useTestimony, useHero } from './api/data';
 import test from 'node:test';
 import Link from 'next/link';
 
@@ -26,6 +26,7 @@ export default function Home() {
     const { partners } = usePartner()
     const { projects } = useProjects()
     const { testimonies } = useTestimony()
+    const { heros } = useHero()
     const pinProject = projects.filter((project) => project.statusProject === 'Pin')
     return (
         <>
@@ -35,15 +36,18 @@ export default function Home() {
             <main className='bg-black'>
                 <Navbar />
                 <div className="relative flex h-screen w-full">
-                    <div className="absolute inset-0 w-full h-full">
-                        <Image
-                            src={hero}
-                            alt="Background Image"
-                            layout="fill"
-                            objectFit="cover"
-                            className="filter bg-black bg-opacity-50"
-                        />
-                    </div>
+                    {heros.map((hero) => (
+                        <div key={hero.id} className="absolute inset-0 w-full h-full">
+                            <Image
+                                src={hero.media.url}
+                                loader={myLoader}
+                                alt="Background Image"
+                                layout="fill"
+                                objectFit="cover"
+                                className="filter bg-black bg-opacity-50"
+                            />
+                        </div>
+                    ))}
                     <div className="absolute inset-0 bg-black bg-opacity-50"></div>
                     <div className="absolute inset-0 flex flex-col items-center md:items-start justify-center px-10 text-3xl md:text-5xl text-white text-center md:text-start">
                         <h1>
@@ -54,7 +58,7 @@ export default function Home() {
                         </h1>
                     </div>
                 </div>
-                <div className="w-full flex bg-black px-10 py-32 justify-center items-center gap-5">
+                <div className="w-full flex bg-black px-10 my-32 justify-center items-center gap-5">
                     <div className='flex flex-col md:flex-row gap-10'>
                         <div className="flex flex-col text-white text-center md:text-start md:w-1/2">
                             <div className="text-xl md:text-3xl mb-4">
@@ -68,7 +72,7 @@ export default function Home() {
                                 </h1>
                             </div>
                             <p className="font-sans text-center md:text-start">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl nulla. Proin vel malesuada magna. Nulla facilisi. Aenean ac massa eget urna lacinia fringilla. Vivamus vestibulum augue in neque interdum, ac venenatis mi vehicula.
+                                Transform your moments into timeless memories. At Dias & Partners, we specialize in capturing the essence of your story through stunning visuals. From candid moments to meticulously planned shoots, we ensure every detail is crafted to perfection.
                             </p>
                         </div>
                         <div className="flex md:w-1/2">
@@ -113,10 +117,10 @@ export default function Home() {
                         <div className='md:w-1/2 flex flex-col gap-5'>
                             <h1 className='text-xl'>
                                 <span className="font-bold">Delivering </span>
-                                <span className={`${libreBaskerville.className} italic font-sans`}>the Ultimate</span>
+                                <span className={`${libreBaskerville.className} italic font-sans`}>Good Experience</span>
                             </h1>
                             <p className="font-sans">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl nulla. Proin vel malesuada magna. Nulla facilisi. Aenean ac massa eget urna lacinia fringilla. Vivamus vestibulum augue in neque interdum, ac venenatis mi vehicula.
+                                We bring your vision to life through innovative creativity and technical expertise. Whether it’s photography, videography, motion graphics, or brand development, our team delivers tailored solutions that leave a lasting impact.
                             </p>
                         </div>
                         <div className='flex justify-end flex-col md:absolute top-[-50px] right-10 gap-4 max-md:w-full'>
@@ -220,7 +224,7 @@ export default function Home() {
                         ))}
                     </Carousel>
                 </div>
-                <div className='bg-black h-screen flex flex-col items-center gap-10 px-10 py-20'>
+                <div className='bg-black flex flex-col items-center gap-10 px-10 py-20'>
                     <h1 className='text-2xl text-white'>
                         <span className="font-bold">Why </span>
                         <span className={`${libreBaskerville.className} italic font-sans`}>clients </span>
@@ -228,16 +232,16 @@ export default function Home() {
                     </h1>
                     <div className='flex flex-col md:flex-row  gap-5'>
                         {testimonies.map((testimony) => (
-                            <div key={testimony.id} className="w-full md:w-[300px] rounded-lg border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white p-4 flex flex-col justify-between leading-normal">
+                            <div key={testimony.id} className="w-full md:w-[300px] rounded-lg border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white bg-opacity-25 p-4 flex flex-col justify-between leading-normal">
                                 <div className="mb-8 gap-3 flex flex-col">
-                                    <Rating name="read-only" value={4} readOnly />
-                                    <p className="text-gray-700 text-base">{testimony.testimony}</p>
+
+                                    <p className="text-white text-base">"{testimony.testimony}"</p>
                                 </div>
                                 <div className="flex items-center">
                                     <Image className="w-10 h-10 rounded-full mr-4" src={service1} alt="Avatar of Jonathan Reinink" />
                                     <div className="text-sm">
-                                        <p className="text-gray-900 leading-none">{testimony.name}</p>
-                                        <p className="text-gray-600">{testimony.occupation}</p>
+                                        <p className="text-white leading-none">{testimony.name}</p>
+                                        <p className="text-white text-opacity-50">{testimony.occupation}</p>
                                     </div>
                                 </div>
                             </div>
