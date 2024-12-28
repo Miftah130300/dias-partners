@@ -43,13 +43,21 @@ interface Testimony {
     }
 }
 
+interface Hero {
+    id: number;
+    name: string;
+    media: {
+        url: string;
+    }
+}
+
 export const useTeam = () => {
     const [teams, setTeams] = useState<Team[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/dias-teams?populate=*`, {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/teams?populate=*`, {
                     headers: {
                         Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
                     },
@@ -76,7 +84,7 @@ export const usePartner = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/dias-partners?populate=*`, {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/partners?populate=*`, {
                     headers: {
                         Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
                     },
@@ -106,7 +114,7 @@ export const useProjects = () => {
         const fetchProjects = async () => {
             try {
                 const response = await axios.get(
-                    `${process.env.NEXT_PUBLIC_API_URL}/api/dias-projects?populate=*`,
+                    `${process.env.NEXT_PUBLIC_API_URL}/api/projects?populate=*`,
                     {
                         headers: {
                             Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
@@ -135,7 +143,7 @@ export const useTestimony = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/dias-testimonies?populate=*`, {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/testimonies?populate=*`, {
                     headers: {
                         Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
                     },
@@ -154,4 +162,31 @@ export const useTestimony = () => {
     }, []);
 
     return { testimonies };
+};
+
+export const useHero = () => {
+    const [heros, setHeros] = useState<Hero[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/heroes?populate=*`, {
+                    headers: {
+                        Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
+                    },
+                });
+                if (!res.ok) {
+                    throw new Error("Failed to fetch cities");
+                }
+                const data = await res.json();
+                setHeros(data.data || []);
+            } catch (error) {
+                console.log(error)
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    return { heros };
 };

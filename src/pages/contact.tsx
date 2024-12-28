@@ -47,7 +47,7 @@ export default function Contact() {
                     <div className="flex justify-center items-center w-full md:w-1/2 mt-10">
                         <div className="flex justify-center items-center md:justify-start md:items-start flex-col gap-5 text-center md:text-start">
                             <div className="text-white">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl nulla. Proin vel malesuada magna. Nulla facilisi.</p>
+                                <p>Ready to bring your ideas to life? Let’s create something amazing together.</p>
                                 <p>Contact us at: <span className="font-bold">youremail@gmail.com</span></p>
                             </div>
                             <div className="text-white">OR</div>

@@ -56,9 +56,7 @@ export default function Project() {
                         </div>
                         <div className="text-lg md:text-xl font-sans">
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl nulla.
-                                Proin vel malesuada magna. Nulla facilisi. Aenean ac massa eget urna lacinia
-                                fringilla.
+                                At Dias & Partners, we understand the value of every moment. Whether it’s a wedding, a product launch, or a personal milestone, we’re here to ensure your memories are beautifully preserved for a lifetime.
                             </p>
                         </div>
                     </div>
@@ -91,27 +89,30 @@ export default function Project() {
                                 {categories.map((category) => (
                                     <TabPanel key={category} className="text-white">
                                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                            {filterProjects(category).map((project) => (
-                                                <Link key={project.id} href={`/project/${project.title.toLowerCase().replace(/\s+/g, '-')}`}>
-                                                    <div className="relative w-full md:w-96 h-72 rounded-lg overflow-hidden">
-                                                        <Image
-                                                            loader={myLoader}
-                                                            src={
-                                                                project.image.url || "/placeholder.png"
-                                                            }
-                                                            alt={project.title}
-                                                            layout="fill"
-                                                            objectFit="cover"
-                                                            quality={100}
-                                                            className="rounded-lg"
-                                                        />
-                                                        <div className="absolute inset-0 flex flex-col justify-center p-5 bg-black bg-opacity-0 text-transparent transition-all duration-300 ease-in-out hover:bg-opacity-50 hover:text-white">
-                                                            <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
-                                                            <p className="text-lg">{project.type}</p>
+                                            {filterProjects(category).length > 0 ? (
+                                                filterProjects(category).map((project) => (
+                                                    <Link key={project.id} href={`/project/${project.title.toLowerCase().replace(/\s+/g, '-')}`}>
+                                                        <div className="relative w-full md:w-96 h-72 rounded-lg overflow-hidden">
+                                                            <Image
+                                                                loader={myLoader}
+                                                                src={
+                                                                    project.image.url || "/placeholder.png"
+                                                                }
+                                                                alt={project.title}
+                                                                layout="fill"
+                                                                objectFit="cover"
+                                                                quality={100}
+                                                                className="rounded-lg"
+                                                            />
+                                                            <div className="absolute inset-0 flex flex-col justify-center p-5 bg-black bg-opacity-0 text-transparent transition-all duration-300 ease-in-out hover:bg-opacity-50 hover:text-white">
+                                                                <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
+                                                                <p className="text-lg">{project.type}</p>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </Link>
-                                            ))}
+                                                    </Link>
+                                                ))) : (
+                                                <div className="italic">No project available yet</div>
+                                            )}
                                         </div>
                                     </TabPanel>
                                 ))}

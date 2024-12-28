@@ -32,10 +32,10 @@ export default function About() {
                             </h1>
                         </div>
                         <div className="text-2xl md:text-3xl font-sans">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl nulla. Proin vel malesuada magna. Nulla facilisi. Aenean ac massa eget urna lacinia fringilla.</p>
+                            <p>Dias & Partners is more than just a creative agency—we’re your partners in storytelling. With a passion for excellence and a commitment to delivering high-quality results, we help brands and individuals create memorable experiences.</p>
                         </div>
                         <div className="text-lg md:text-2xl font-sans">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl nulla. Proin vel malesuada magna. Nulla facilisi. Aenean ac massa eget urna lacinia fringilla.</p>
+                            <p>Our team blends artistry with strategy to provide services that resonate with your audience and elevate your brand to new heights.</p>
                         </div>
                     </div>
                 </div>
@@ -47,27 +47,38 @@ export default function About() {
                                 <span className={`${libreBaskerville.className} italic font-sans`}>Services</span>
                             </h1>
                         </div>
-                        <div className="flex flex-col md:flex-row gap-20">
-                            <div className="flex flex-col items-center text-center w-[200px] gap-3">
-                                <VideocamIcon fontSize="large" />
-                                <h1 className="text-xl">Photography & Videography</h1>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl nulla.</p>
-                            </div>
-                            <div className="flex flex-col items-center text-center w-[200px] gap-3">
-                                <BrushIcon fontSize="large" />
-                                <h1 className="text-xl">Graphic & Motion Design</h1>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl nulla.</p>
-                            </div>
-                            <div className="flex flex-col items-center text-center w-[200px] gap-3">
-                                <InterestsIcon fontSize="large" />
-                                <h1 className="text-xl">Brand Development</h1>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl nulla.</p>
-                            </div>
-                            <div className="flex flex-col items-center text-center w-[200px] gap-3">
-                                <WebIcon fontSize="large" />
-                                <h1 className="text-xl">Landing Page</h1>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl nulla.</p>
-                            </div>
+                        <div className="flex flex-col md:flex-row gap-10">
+                            {[
+                                {
+                                    icon: <VideocamIcon fontSize="large" />,
+                                    title: "Photography & Videography",
+                                    description: "Capture your story in the most authentic and visually compelling way. From personal milestones to brand campaigns, our photography and videography services are designed to inspire.",
+                                },
+                                {
+                                    icon: <BrushIcon fontSize="large" />,
+                                    title: "Graphic & Motion Design",
+                                    description: "Engage your audience with eye-catching graphics and dynamic motion designs. Our creative team crafts visuals that not only look great but also communicate your message effectively.",
+                                },
+                                {
+                                    icon: <InterestsIcon fontSize="large" />,
+                                    title: "Brand Development",
+                                    description: "Build a brand that stands out. Help you define your identity, tell your story, and connect with your audience through cohesive and impactful strategies.",
+                                },
+                                {
+                                    icon: <WebIcon fontSize="large" />,
+                                    title: "Landing Page",
+                                    description: "Your digital front door deserves to make a great first impression. Design a sleek, user-friendly landing pages that drive engagement and conversions.",
+                                },
+                            ].map((item, index) => (
+                                <div
+                                    key={index}
+                                    className="flex flex-col items-center justify-start text-center w-full md:w-[250px] h-auto gap-4 p-5 border rounded-lg shadow-lg"
+                                >
+                                    <div className="flex items-center justify-center h-16">{item.icon}</div>
+                                    <h1 className="text-xl font-bold h-10 flex items-center">{item.title}</h1>
+                                    <p className="text-sm text-white text-opacity-90 flex-grow">{item.description}</p>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -81,16 +92,16 @@ export default function About() {
                         </div>
                         <div className="flex flex-col md:flex-row gap-5">
                             <div className="max-w-xs p-6 bg-white bg-opacity-25 text-white rounded-xl text-center">
-                                <h1 className="mb-2 text-xl font-semibold">Need a help in Claim?</h1>
-                                <p className="mb-3 font-normal">Go to this step by step guideline process on how to certify for your weekly benefits:</p>
+                                <h1 className="mb-2 text-xl font-semibold">Passion for Creativity</h1>
+                                <p className="mb-3 font-normal">We believe in pushing boundaries to create something extraordinary</p>
                             </div>
                             <div className="max-w-xs p-6 bg-white bg-opacity-25 text-white rounded-xl text-center">
-                                <h1 className="mb-2 text-xl font-semibold">Need a help in Claim?</h1>
-                                <p className="mb-3 font-normal">Go to this step by step guideline process on how to certify for your weekly benefits:</p>
+                                <h1 className="mb-2 text-xl font-semibold">Client-Centric Approach</h1>
+                                <p className="mb-3 font-normal">Your satisfaction is our priority. We work closely with you to ensure every project exceeds expectations</p>
                             </div>
                             <div className="max-w-xs p-6 bg-white bg-opacity-25 text-white rounded-xl text-center">
-                                <h1 className="mb-2 text-xl font-semibold">Need a help in Claim?</h1>
-                                <p className="mb-3 font-normal">Go to this step by step guideline process on how to certify for your weekly benefits:</p>
+                                <h1 className="mb-2 text-xl font-semibold">Commitment to Quality</h1>
+                                <p className="mb-3 font-normal"> From concept to completion, we uphold the highest standards in everything we do</p>
                             </div>
                         </div>
                     </div>
