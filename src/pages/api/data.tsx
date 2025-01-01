@@ -31,6 +31,7 @@ interface Project {
         url: string;
     }[]
     statusProject: string;
+    youtube: string;
 }
 
 interface Testimony {
@@ -48,6 +49,7 @@ interface Hero {
     name: string;
     media: {
         url: string;
+        mime: string;
     }
 }
 
@@ -165,12 +167,12 @@ export const useTestimony = () => {
 };
 
 export const useHero = () => {
-    const [heros, setHeros] = useState<Hero[]>([]);
+    const [heros, setHeros] = useState<Hero | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/heroes?populate=*`, {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/hero?populate=*`, {
                     headers: {
                         Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
                     },
@@ -179,7 +181,7 @@ export const useHero = () => {
                     throw new Error("Failed to fetch cities");
                 }
                 const data = await res.json();
-                setHeros(data.data || []);
+                setHeros(data.data || null);
             } catch (error) {
                 console.log(error)
             }

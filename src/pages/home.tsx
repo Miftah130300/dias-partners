@@ -13,14 +13,20 @@ import { libreBaskerville } from "../font/font";
 const Footer = dynamic(() => import('src/component/footer'), { ssr: false });
 const Navbar = dynamic(() => import('src/component/navbar'), { ssr: false });
 import { Carousel } from "flowbite-react";
-import Rating from '@mui/material/Rating';
 import { usePartner, useProjects, useTestimony, useHero } from './api/data';
-import test from 'node:test';
 import Link from 'next/link';
 
 const myLoader = ({ src }: { src: string }) => {
     return src ? `${process.env.NEXT_PUBLIC_API_URL}${src}` : "/placeholder.png";
 };
+
+interface Hero {
+    id: number;
+    name: string;
+    media: {
+        url: string;
+    }
+}
 
 export default function Home() {
     const { partners } = usePartner()
@@ -28,6 +34,9 @@ export default function Home() {
     const { testimonies } = useTestimony()
     const { heros } = useHero()
     const pinProject = projects.filter((project) => project.statusProject === 'Pin')
+
+    const isMediaVideo = heros?.media?.mime?.startsWith('video/');
+
     return (
         <>
             <Head>
@@ -36,18 +45,24 @@ export default function Home() {
             <main className='bg-black'>
                 <Navbar />
                 <div className="relative flex h-screen w-full">
-                    {heros.map((hero) => (
-                        <div key={hero.id} className="absolute inset-0 w-full h-full">
+                    <div className="absolute inset-0 w-full h-full">
+                        {isMediaVideo ? (
+                            <video controls>
+                                <source src={heros?.media.url} type={heros?.media.mime} />
+                                Your browser does not support the video tag.
+                            </video>
+                        ) : (
                             <Image
-                                src={hero.media.url}
+                                src={heros?.media.url || ''}
                                 loader={myLoader}
                                 alt="Background Image"
                                 layout="fill"
                                 objectFit="cover"
                                 className="filter bg-black bg-opacity-50"
                             />
-                        </div>
-                    ))}
+                        )
+                        }
+                    </div>
                     <div className="absolute inset-0 bg-black bg-opacity-50"></div>
                     <div className="absolute inset-0 flex flex-col items-center md:items-start justify-center px-10 text-3xl md:text-5xl text-white text-center md:text-start">
                         <h1>
@@ -274,7 +289,7 @@ export default function Home() {
                         <span className={`${libreBaskerville.className} italic font-sans`}>collaborate </span>
                         <span className="font-bold">with us?</span>
                     </h1>
-                    <button className='p-4 bg-white rounded-lg max-w-52 font-bold hover:bg-white hover:bg-opacity-80'>BOOK NOW</button>
+                    <a href='https://wa.me/6289510793634' target='_blank' className='p-4 bg-white rounded-lg max-w-52 font-bold hover:bg-white hover:bg-opacity-80'>BOOK NOW</a>
                 </div>
                 <Footer />
             </main >

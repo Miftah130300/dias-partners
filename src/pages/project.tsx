@@ -42,7 +42,7 @@ export default function Project() {
             </Head>
             <main className="bg-black">
                 <Navbar />
-                <div className="bg-black text-white flex justify-center items-center px-5 md:px-10 pt-40 pb-10 md:pb-32">
+                <div className="bg-black text-white flex justify-center items-center px-5 md:px-10 pt-40 pb-20">
                     <div className="md:w-3/4 text-center flex flex-col gap-5">
                         <div className="text-3xl md:text-5xl mb-4">
                             <h1>
