@@ -34,6 +34,14 @@ export default function DetailProject() {
     const projectImageUrl = project.image?.url || "/fallback-image.jpg";
     const projectImages = project.projects || [];
 
+    const extractVideoId = (url: string) => {
+        const regex = /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+        const match = url.match(regex);
+        return match ? match[1] : null;
+    };
+
+    const videoId = extractVideoId(project.youtube);
+
     return (
         <>
             <Head>
@@ -67,22 +75,37 @@ export default function DetailProject() {
                             </span>
                         </h1>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
-                            {projectImages.length > 0 ? (
-                                projectImages.map((image, index) => (
-                                    <div key={index} className="relative w-full h-64">
-                                        <Image
-                                            src={image.url}
-                                            alt={`Project Image ${index + 1}`}
-                                            loader={myLoader}
-                                            layout="fill"
-                                            objectFit="cover"
-                                            className="rounded-md"
-                                        />
-                                    </div>
-                                ))
-                            ) : (
-                                <div className="text-white">No image yet</div>
-                            )}
+                            <>
+                                {projectImages.length > 0 ? (
+                                    projectImages.map((image, index) => (
+                                        <div key={index} className="relative w-full h-64">
+                                            <Image
+                                                src={image.url}
+                                                alt={`Project Image ${index + 1}`}
+                                                loader={myLoader}
+                                                layout="fill"
+                                                objectFit="cover"
+                                                className="rounded-md"
+                                            />
+                                        </div>
+                                    ))
+                                ) : (
+                                    null
+                                )}
+                            </>
+                            <>
+                                {videoId ? (
+                                    <iframe className="w-full h-64"
+                                        src={`https://www.youtube.com/embed/${videoId}`}
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowFullScreen
+                                        title="YouTube Video"
+                                    ></iframe>
+                                ) : (
+                                    null
+                                )}
+                            </>
                         </div>
                     </div>
                 </div>

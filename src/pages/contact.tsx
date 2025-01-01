@@ -48,10 +48,10 @@ export default function Contact() {
                         <div className="flex justify-center items-center md:justify-start md:items-start flex-col gap-5 text-center md:text-start">
                             <div className="text-white">
                                 <p>Ready to bring your ideas to life? Let’s create something amazing together.</p>
-                                <p>Contact us at: <span className="font-bold">youremail@gmail.com</span></p>
+                                <p>Contact us at: <span className="font-bold">partnersdias@gmail.com</span></p>
                             </div>
                             <div className="text-white">OR</div>
-                            <button className='p-4 bg-white rounded-lg max-w-52 font-bold hover:bg-white hover:bg-opacity-80'>BOOK NOW</button>
+                            <a href='https://wa.me/6289510793634' target='_blank' className='p-4 bg-white rounded-lg max-w-52 font-bold hover:bg-white hover:bg-opacity-80'>BOOK NOW</a>
                         </div>
                     </div>
                 </div>

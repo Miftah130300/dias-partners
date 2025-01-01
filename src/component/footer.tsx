@@ -25,26 +25,26 @@ export default function Footer() {
                 <div>Connect with us:</div>
                 <div className="flex gap-2">
                     <InstagramIcon />
-                    <div>Instagram name</div>
+                    <div>Diaspartners</div>
                 </div>
                 <div className="flex gap-2">
                     <YouTubeIcon />
-                    <div>YouTube name</div>
+                    <div>Dias & partners</div>
                 </div>
                 <div className="flex gap-2">
                     <LinkedInIcon />
-                    <div>LinkedIn name</div>
+                    <div>Dias & partners</div>
                 </div>
             </div>
             <div>
                 <div>Let`s collaborate:</div>
                 <div className="flex gap-2">
                     <PhoneIcon />
-                    <div>Phone number</div>
+                    <div>+62 895-1079-3634</div>
                 </div>
                 <div className="flex gap-2">
                     <EmailIcon />
-                    <div>Email address</div>
+                    <div>partnersdias@gmail.com</div>
                 </div>
             </div>
         </div>

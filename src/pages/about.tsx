@@ -23,7 +23,7 @@ export default function About() {
             </Head>
             <main className="bg-black">
                 <Navbar />
-                <div className="bg-black text-white flex justify-center items-center px-10 py-32">
+                <div className="bg-black text-white flex justify-center items-center px-10 pt-40 pb-20">
                     <div className="md:w-3/4 text-center flex flex-col gap-5">
                         <div className="text-xl md:text-2xl mb-4">
                             <h1>
