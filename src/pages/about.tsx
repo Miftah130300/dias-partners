@@ -106,38 +106,40 @@ export default function About() {
                         </div>
                     </div>
                 </div>
-                <div className="bg-black px-10 py-20">
-                    <div className="text-white flex flex-col justify-center items-center gap-10">
-                        <div className="text-2xl mb-4">
-                            <h1>
-                                <span className="font-bold">Meet </span>
-                                <span className={`${libreBaskerville.className} italic font-sans`}>The Teams</span>
-                            </h1>
-                        </div>
-                        <div className="flex flex-col md:flex-row gap-5">
-                            {teams.map((team) => (
-                                <div key={team.id} className="max-w-sm bg-black text-white text-center border-gray-200 rounded-lg gap-3 flex flex-col">
-                                    <div className="relative w-[200px] h-[350px] mx-auto">
-                                        <Image
-                                            className="rounded-lg object-cover"
-                                            loader={myLoader}
-                                            layout="fill"
-                                            src={team.image.url}
-                                            alt={`Image of ${team.name} ${team.lastName}`}
-                                        />
+                {teams && teams.length > 0 && (
+                    <div className="bg-black px-10 py-20">
+                        <div className="text-white flex flex-col justify-center items-center gap-10">
+                            <div className="text-2xl mb-4">
+                                <h1>
+                                    <span className="font-bold">Meet </span>
+                                    <span className={`${libreBaskerville.className} italic font-sans`}>The Teams</span>
+                                </h1>
+                            </div>
+                            <div className="flex flex-col md:flex-row gap-5">
+                                {teams.map((team) => (
+                                    <div key={team.id} className="max-w-sm bg-black text-white text-center border-gray-200 rounded-lg gap-3 flex flex-col">
+                                        <div className="relative w-[200px] h-[350px] mx-auto">
+                                            <Image
+                                                className="rounded-lg object-cover"
+                                                loader={myLoader}
+                                                layout="fill"
+                                                src={team.image.url}
+                                                alt={`Image of ${team.name} ${team.lastName}`}
+                                            />
+                                        </div>
+                                        <div>
+                                            <h1>
+                                                <span className="font-bold">{team.name} </span>
+                                                <span className={`${libreBaskerville.className} italic font-sans`}>{team.lastName}</span>
+                                            </h1>
+                                            <p>{team.position}</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h1>
-                                            <span className="font-bold">{team.name} </span>
-                                            <span className={`${libreBaskerville.className} italic font-sans`}>{team.lastName}</span>
-                                        </h1>
-                                        <p>{team.position}</p>
-                                    </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
                     </div>
-                </div>
+                )}
                 <Footer />
             </main>
         </>

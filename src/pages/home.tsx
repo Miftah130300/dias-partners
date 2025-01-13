@@ -20,22 +20,15 @@ const myLoader = ({ src }: { src: string }) => {
     return src ? `${process.env.NEXT_PUBLIC_API_URL}${src}` : "/placeholder.png";
 };
 
-interface Hero {
-    id: number;
-    name: string;
-    media: {
-        url: string;
-    }
-}
-
 export default function Home() {
     const { partners } = usePartner()
     const { projects } = useProjects()
     const { testimonies } = useTestimony()
     const { heros } = useHero()
+    console.log(heros?.media.url)
     const pinProject = projects.filter((project) => project.statusProject === 'Pin')
 
-    const isMediaVideo = heros?.media?.mime?.startsWith('video/');
+    const isMediaVideo = heros?.media.mime.startsWith('video')
 
     return (
         <>
@@ -48,7 +41,7 @@ export default function Home() {
                     <div className="absolute inset-0 w-full h-full">
                         {isMediaVideo ? (
                             <video controls>
-                                <source src={heros?.media.url} type={heros?.media.mime} />
+                                <source src={heros?.media.url} className='flex justify-center items-center absolute' type={heros?.media.mime} />
                                 Your browser does not support the video tag.
                             </video>
                         ) : (
@@ -215,74 +208,80 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div className='bg-black h-screen flex items-center justify-center'>
-                    <Carousel className='px-5 md:px-10' autoFocus>
-                        {pinProject.map((project) => (
-                            <Link key={project.id} href={`/project/${project.title.toLowerCase().replace(/\s+/g, '-')}`} className='bg-white bg-opacity-25 w-full h-96 md:w-[700px] rounded-lg flex flex-col md:flex-row justify-center items-center p-5 md:p-10 gap-10'>
-                                <div className='rounded-lg h-52 md:h-full w-full md:w-96 relative'>
-                                    <Image
-                                        src={project.image.url}
-                                        alt={project.title}
-                                        layout="fill"
-                                        objectFit="cover"
-                                        className='rounded-lg img'
-                                        loader={myLoader}
-                                    />
-                                </div>
-                                <div className='flex flex-col justify-center max-md:items-center gap-5'>
-                                    <h1 className='text-2xl text-white'>
-                                        <span className="font-semibold">{project.title} </span>
-                                    </h1>
-                                    <button className='text-black p-4 bg-white rounded-lg max-w-52 font-bold hover:bg-white hover:bg-opacity-80'>VIEW PROJECT</button>
-                                </div>
-                            </Link>
-                        ))}
-                    </Carousel>
-                </div>
-                <div className='bg-black flex flex-col items-center gap-10 px-10 py-20'>
-                    <h1 className='text-2xl text-white'>
-                        <span className="font-bold">Why </span>
-                        <span className={`${libreBaskerville.className} italic font-sans`}>clients </span>
-                        <span className="font-bold">love us</span>
-                    </h1>
-                    <div className='flex flex-col md:flex-row  gap-5'>
-                        {testimonies.map((testimony) => (
-                            <div key={testimony.id} className="w-full md:w-[300px] rounded-lg border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white bg-opacity-25 p-4 flex flex-col justify-between leading-normal">
-                                <div className="mb-8 gap-3 flex flex-col">
+                {pinProject && pinProject.length > 0 && (
+                    <div className='bg-black h-screen flex items-center justify-center'>
+                        <Carousel className='px-5 md:px-10' autoFocus>
+                            {pinProject.map((project) => (
+                                <Link key={project.id} href={`/project/${project.title.toLowerCase().replace(/\s+/g, '-')}`} className='bg-white bg-opacity-25 w-full h-96 md:w-[700px] rounded-lg flex flex-col md:flex-row justify-center items-center p-5 md:p-10 gap-10'>
+                                    <div className='rounded-lg h-52 md:h-full w-full md:w-96 relative'>
+                                        <Image
+                                            src={project.image.url}
+                                            alt={project.title}
+                                            layout="fill"
+                                            objectFit="cover"
+                                            className='rounded-lg img'
+                                            loader={myLoader}
+                                        />
+                                    </div>
+                                    <div className='flex flex-col justify-center max-md:items-center gap-5'>
+                                        <h1 className='text-2xl text-white'>
+                                            <span className="font-semibold">{project.title} </span>
+                                        </h1>
+                                        <button className='text-black p-4 bg-white rounded-lg max-w-52 font-bold hover:bg-white hover:bg-opacity-80'>VIEW PROJECT</button>
+                                    </div>
+                                </Link>
+                            ))}
+                        </Carousel>
+                    </div>
+                )}
+                {testimonies && testimonies.length > 0 && (
+                    <div className='bg-black flex flex-col items-center gap-10 px-10 py-20'>
+                        <h1 className='text-2xl text-white'>
+                            <span className="font-bold">Why </span>
+                            <span className={`${libreBaskerville.className} italic font-sans`}>clients </span>
+                            <span className="font-bold">love us</span>
+                        </h1>
+                        <div className='flex flex-col md:flex-row  gap-5'>
+                            {testimonies.map((testimony) => (
+                                <div key={testimony.id} className="w-full md:w-[300px] rounded-lg border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white bg-opacity-25 p-4 flex flex-col justify-between leading-normal">
+                                    <div className="mb-8 gap-3 flex flex-col">
 
-                                    <p className="text-white text-base">{testimony.testimony}</p>
-                                </div>
-                                <div className="flex items-center">
-                                    <Image className="w-10 h-10 rounded-full mr-4" src={service1} alt="Avatar of Jonathan Reinink" />
-                                    <div className="text-sm">
-                                        <p className="text-white leading-none">{testimony.name}</p>
-                                        <p className="text-white text-opacity-50">{testimony.occupation}</p>
+                                        <p className="text-white text-base">{testimony.testimony}</p>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <Image className="w-10 h-10 rounded-full mr-4" src={service1} alt="Avatar of Jonathan Reinink" />
+                                        <div className="text-sm">
+                                            <p className="text-white leading-none">{testimony.name}</p>
+                                            <p className="text-white text-opacity-50">{testimony.occupation}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
-                </div>
-                <div className="bg-black py-20 w-full flex flex-col items-center">
-                    <h1 className="text-2xl text-white">
-                        <span className="font-bold">We </span>
-                        <span className={`${libreBaskerville.className} italic font-sans`}>worked </span>
-                        <span className="font-bold">with</span>
-                    </h1>
-                    <div className="flex flex-wrap justify-center gap-6 mt-8">
-                        {partners.map((partner) => (
-                            <div key={partner.id} className="w-[100px] h-[100px] relative">
-                                <Image
-                                    className="rounded-lg object-contain"
-                                    src={partner.image.url}
-                                    layout='fill'
-                                    loader={myLoader}
-                                    alt={`Image of ${partner.name}`}
-                                />
-                            </div>
-                        ))}
+                )}
+                {partners && partners.length > 0 && (
+                    <div className="bg-black py-20 w-full flex flex-col items-center">
+                        <h1 className="text-2xl text-white">
+                            <span className="font-bold">We </span>
+                            <span className={`${libreBaskerville.className} italic font-sans`}>worked </span>
+                            <span className="font-bold">with</span>
+                        </h1>
+                        <div className="flex flex-wrap justify-center gap-6 mt-8">
+                            {partners.map((partner) => (
+                                <div key={partner.id} className="w-[100px] h-[100px] relative">
+                                    <Image
+                                        className="rounded-lg object-contain"
+                                        src={partner.image.url}
+                                        layout='fill'
+                                        loader={myLoader}
+                                        alt={`Image of ${partner.name}`}
+                                    />
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                </div>
+                )}
                 <div className='bg-black flex flex-col justify-center items-center py-20 gap-5 w-full'>
                     <h1 className='text-white text-2xl'>
                         <span className="font-bold">Ready to </span>
